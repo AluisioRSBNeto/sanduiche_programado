@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Sanduíche Programado | Aprender a programar é gostoso!</title>
+        
+</head>
+<body>
+
+    <header>
+        <h1>🍔 Sanduíche Programado 🤖</h1>
+        <p>Aprender a programar é fácil, gostoso e divertido!</p>
+    </header>
+
+    <nav>
+        <a href="#jogos">Cozinha dos Jogos</a>
+        <a href="#videos">Vídeos do Chef Lógico</a>
+        <a href="#progresso">Meu Prato de Lógica</a>
+        <a href="maisjogos.html">Mais Jogos</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="jogos" class="section">
+            <h2>🕹️ Cozinha dos Jogos</h2>
+            <p>Escolha seu ingrediente favorito e comece a montar seu algoritmo!</p>
+            
+            <div class="game-grid">
+                
+                <div class="game-card">
+                    <h3>Sequência Mágica</h3>
+                    <p>Monte o algoritmo de preparo do sanduíche (Ordem e Sequência).</p>
+                    <button onclick="SanduicheProgramado.iniciarJogo('Sequência Mágica')">Jogar</button>
+                </div>
+
+                <div class="game-card">
+                    <h3>Labirinto Lógico</h3>
+                    <p>Use o comando REPITA para mover o ingrediente! (Repetição).</p>
+                    <button onclick="SanduicheProgramado.iniciarJogo('Labirinto Lógico')">Jogar</button>
+                </div>
+
+                <div class="game-card">
+                    <h3>Memória de Comandos</h3>
+                    <p>Ligue a função à sua ação correspondente! (Variáveis/Funções).</p>
+                    <button onclick="SanduicheProgramado.iniciarJogo('Memória de Comandos')">Jogar</button>
+                </div>
+
+                <div class="game-card">
+                    <h3>Blocos de Código</h3>
+                    <p>Use o SE/ENTÃO para decidir o que vai no sanduíche! (Condicionais).</p>
+                    <button onclick="SanduicheProgramado.iniciarJogo('Blocos de Código')">Jogar</button>
+                </div>
+
+                <div class="game-card">
+                    <h3>Monta Sanduíche</h3>
+                    <p>O teste final! Corrija a receita com erros (Debugging).</p>
+                    <button onclick="SanduicheProgramado.iniciarJogo('Monta Sanduíche')">Jogar</button>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="videos" class="section">
+            <h2>📺 Vídeos do Chef Lógico</h2>
+            <p>O Chef Byte explica os conceitos em vídeos curtos e deliciosos.</p>
+            
+            <div class="game-grid">
+                
+                <div class="video-card">
+                    <h3>A Ordem dos Ingredientes</h3>
+                    <p>Entenda o que é um Algoritmo e a importância da Sequência.</p>
+                    <div style="height: 150px; background-color: #B2EBF2; line-height: 150px;">Área de Vídeo 1 (Algoritmos)
+                    </div>
+                    
+                </div>
+
+                <div class="video-card">
+                    <h3>Decisões na Cozinha</h3>
+                    <p>Aprendendo sobre Condicionais (SE/ENTÃO/SENÃO).</p>
+                    <div style="height: 150px; background-color: #B2EBF2; line-height: 150px;">Área de Vídeo 2 (Condicionais)</div>
+                </div>
+                
+                <div class="video-card">
+                    <h3>Ajudantes Mágicos</h3>
+                    <p>O poder das Funções e Procedimentos.</p>
+                    <div style="height: 150px; background-color: #B2EBF2; line-height: 150px;">Área de Vídeo 3 (Funções)</div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="progresso" class="section">
+            <h2>⭐ Meu Prato de Lógica</h2>
+            <div style="padding: 20px; border: 2px dashed #4CAF50; text-align: center;">
+                Carregando progresso...
+            </div>
+        </section>
+
+    </div>
+
+    <div id="modal-sequencia" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="SanduicheProgramado.fecharModal('modal-sequencia')">&times;</span>
+            <h2>🥪 Sequência Mágica: Pão com Queijo</h2>
+            <p>Arraste os comandos abaixo para o "Algoritmo de Preparo" na ordem correta para fazer um pão com queijo!</p>
+            <div class="jogo-container">
+                <div id="comandos-disponiveis" class="comandos-pool">
+                    <h4>Caixa de Ingredientes (Comandos)</h4>
+                    <div class="comando" data-comando="Colocar Pão em Baixo">🍞 Pão em Baixo</div>
+                    <div class="comando" data-comando="Colocar Queijo">🧀 Colocar Queijo</div>
+                    <div class="comando" data-comando="Colocar Pão em Cima">🍞 Pão em Cima</div>
+                </div>
+                <div id="algoritmo-preparo" class="algoritmo-area" ondragover="event.preventDefault()">
+                    <h4>Algoritmo de Preparo (Arraste para cá)</h4>
+                </div>
+            </div>
+            <button id="executar-sequencia">Executar e Ver o Sanduíche!</button>
+            <p id="resultado-sequencia" style="margin-top: 15px; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <div id="modal-labirinto" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="SanduicheProgramado.fecharModal('modal-labirinto')">&times;</span>
+            <h2>🥬 Labirinto Lógico: O Caminho da Alface</h2>
+            <p>Ajude a Batata Programadora a chegar na Alface. Use o comando **REPITA** para economizar passos!</p>
+            <div class="jogo-labirinto-container">
+                <div id="labirinto-visual" style="flex: 1; text-align: center;">
+                    <p>📍 Posição Atual: Início</p>
+                    <p>🎯 Objetivo: Chegar em **15 passos**.</p>
+                </div>
+                <div id="comandos-repeticao" class="algoritmo-area" ondragover="event.preventDefault()">
+                    <h4>Comandos de Execução (Arraste para cá)</h4>
+                </div>
+            </div>
+            <div id="blocos-labirinto" style="margin-top: 15px; text-align: center;">
+                <p>Blocos de Ação:</p>
+                <div class="bloco-repeticao" data-comando="REPITA 10x" style="display: inline-block;">🔁 REPITA 10x (Mover Frente)</div>
+                <div class="bloco-repeticao" data-comando="REPITA 5x" style="display: inline-block;">🔁 REPITA 5x (Mover Frente)</div>
+                <div class="bloco-basico" data-comando="VIRAR DIREITA" style="display: inline-block;">➡️ Virar Direita</div>
+            </div>
+            <button id="executar-labirinto" style="margin-top: 20px;">Executar o Percurso!</button>
+            <p id="resultado-labirinto" style="margin-top: 15px; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <div id="modal-memoria" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="SanduicheProgramado.fecharModal('modal-memoria')">&times;</span>
+            <h2>🥓 Memória de Comandos: Variáveis e Funções</h2>
+            <p>Encontre os pares! Ligue o Nome da Função (Comando) à sua Ação correspondente, e a Variável ao seu Valor.</p>
+            <div id="tabuleiro-memoria" class="game-grid" style="gap: 10px; margin-top: 20px;">
+                <p>Clique em INICIAR JOGO para embaralhar os comandos...</p>
+            </div>
+            <button id="iniciar-memoria" style="margin-top: 20px;">INICIAR JOGO!</button>
+            <p id="feedback-memoria" style="margin-top: 15px; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <div id="modal-condicional" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="SanduicheProgramado.fecharModal('modal-condicional')">&times;</span>
+            <h2>🧀 Blocos de Código: A Decisão do Queijo</h2>
+            <p>Monte a regra SE/ENTÃO/SENÃO para adicionar o queijo corretamente à receita!</p>
+            <div class="jogo-condicional-container" style="text-align: left;">
+                <p style="font-style: italic;">**A Regra da Cozinha:**</p>
+                <div id="estrutura-se-entao" class="algoritmo-area" style="min-height: 250px;">
+                    <h4>Estrutura SE/ENTÃO/SENÃO (Arraste para cá)</h4>
+                </div>
+                <div id="blocos-condicionais-pool" style="margin-top: 20px; text-align: center; flex-direction: column; align-items: center;">
+                    <p>Blocos de Lógica:</p>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 5px;">
+                        <div class="bloco-logico" data-comando="SE (Cliente Gosta de Queijo)" style="display: inline-block;">🟢 SE (Cliente Gosta de Queijo)</div>
+                        <div class="bloco-logico" data-comando="ENTÃO (Adicionar Queijo)" style="display: inline-block;">➡️ ENTÃO (Adicionar Queijo)</div>
+                        <div class="bloco-logico" data-comando="SENÃO (Adicionar Alface)" style="display: inline-block;">❌ SENÃO (Adicionar Alface)</div>
+                        <div class="bloco-final" data-comando="FIMSE" style="display: inline-block;">FIM SE</div>
+                    </div>
+                </div>
+            </div>
+            <button id="executar-condicional" style="margin-top: 20px;">Testar a Receita!</button>
+            <p id="resultado-condicional" style="margin-top: 15px; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <div id="modal-final" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="SanduicheProgramado.fecharModal('modal-final')">&times;</span>
+            <h2>🍞 Monta Sanduíche: Desafio Final (O Debugging)</h2>
+            <p>A receita do Chef Byte veio com erros! Corrija os blocos no "Algoritmo Bugado" para que o sanduíche fique perfeito.</p>
+            <div class="jogo-final-container" style="text-align: left;">
+                <p>📋 Receita Perfeita: Pão de baixo, 5 fatias de presunto, SE cliente gostar de queijo, colocar queijo, Pão de cima.</p>
+                <div id="algoritmo-bugado" class="algoritmo-area" ondragover="event.preventDefault()" style="min-height: 250px;">
+                    <h4>Algoritmo Bugado (Arraste para reorganizar e corrigir)</h4>
+                </div>
+                <div id="blocos-reposicao-final" style="margin-top: 20px; text-align: center;">
+                    <p>Blocos de Reposição (para substituir os errados):</p>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 5px;">
+                         <div class="bloco-reposicao" data-comando="Colocar Pão em Baixo" style="display: inline-block;">🍞 Pão em Baixo (Sequência)</div>
+                         <div class="bloco-reposicao" data-comando="REPITA 5x (Presunto)" style="display: inline-block;">🔁 REPITA 5x (Repetição)</div>
+                         <div class="bloco-reposicao" data-comando="SE (Cliente Gosta de Queijo)" style="display: inline-block;">🟢 SE... (Condicional)</div>
+                    </div>
+                </div>
+            </div>
+            <button id="testar-sanduiche" style="margin-top: 20px;">Testar Sanduíche Corrigido!</button>
+            <p id="resultado-final" style="margin-top: 15px; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p style="text-align: center; padding: 10px; background-color: #333; color: white; margin-top: 20px;">
+            © Sanduíche Programado | Programando desde pequeno.
+        </p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/maisjogos.css">
+    <title>Sanduíche Programado | Jogo Online de Lógica</title>
+    
+    </head>
+<body>
+
+    <header>
+        <h1>🍔 Sanduíche Programado 🤖</h1>
+        <nav>
+            <ul id="menu-jogos"></ul>
+        </nav>
+
+        <nav>
+        <a href="index.html">Voltar</a>
+    </nav>
+
+    </header>
+
+    <main class="container">
+        
+        <section id="jogo1" class="jogo-container">
+            <h2>1. Sequência Mágica 💫</h2>
+            <p>Monte o sanduíche seguindo a **Ordem Correta**. Arraste os ingredientes!</p>
+
+            <div class="jogo-area-grid">
+                <div class="coluna" style="border: 2px solid var(--cor-queijo);">
+                    <h3>Receita (Ordem Alvo)</h3>
+                    <div id="receita-alvo" class="lista-programa"></div>
+                </div>
+
+                <div class="coluna" style="border: 2px solid var(--cor-alface);">
+                    <h3>Ingredientes (Blocos)</h3>
+                    <div class="comandos-disponiveis">
+                        <div class="bloco-comando avancar ingrediente" id="pao" draggable="true" style="background-color: var(--cor-pao); color: #333;">Pão 🍞</div>
+                        <div class="bloco-comando loop ingrediente" id="queijo" draggable="true" style="background-color: var(--cor-queijo); color: #333;">Queijo 🧀</div>
+                        <div class="bloco-comando avancar ingrediente" id="alface" draggable="true" style="background-color: var(--cor-alface);">Alface 🥬</div>
+                        <div class="bloco-comando condicional ingrediente" id="tomate" draggable="true" style="background-color: var(--cor-tomate);">Tomate 🍅</div>
+                    </div>
+                </div>
+
+                <div class="coluna" style="border: 2px solid var(--cor-tomate);">
+                    <h3>Seu Programa (Sanduíche)</h3>
+                    <div id="sanduiche-jogador" class="lista-programa" ondrop="handleDrop(event, 'jogo1')" ondragover="permitirDrop(event)">
+                        <p class="placeholder-programa">Arraste os ingredientes aqui!</p>
+                    </div>
+                    <button onclick="verificarSequencia()">Verificar a Ordem!</button>
+                </div>
+            </div>
+            <div id="mensagem-jogo1" class="mensagem-jogo" style="display:none;"></div>
+        </section>
+        
+        <section id="jogo2" class="jogo-container robo-chef-jogo">
+            <h2>2. Aventura do Robô-Chef 🤖</h2>
+            <p>Guie o Robô (0,0) até o alvo (3,4). Pense no **passo-a-passo**!</p>
+
+            <div class="jogo-area-robo">
+                <div id="tabuleiro" class="tabuleiro-grid">
+                    <div id="robo-chef" class="robo" data-direcao="Norte">⬆️</div>
+                    <div id="alvo-queijo" class="alvo-ingrediente" style="transform: translate(360px, 360px);">🧀</div>
+                </div>
+
+                <div class="coluna" style="min-width: 350px;">
+                    <h3>Blocos de Comando</h3>
+                    <div class="comandos-disponiveis">
+                        <div class="bloco-comando avancar" draggable="true" data-comando="AVANCAR">AVANÇAR ⬆️</div>
+                        <div class="bloco-comando virar" draggable="true" data-comando="DIREITA">VIRAR DIREITA ↪️</div>
+                        <div class="bloco-comando virar" draggable="true" data-comando="ESQUERDA">VIRAR ESQUERDA ↩️</div>
+                    </div>
+
+                    <h3>Seu Programa</h3>
+                    <div id="programa-jogador" class="lista-programa" ondrop="handleDrop(event, 'jogo2')" ondragover="permitirDrop(event)">
+                        <p class="placeholder-programa">Arraste os comandos aqui!</p>
+                    </div>
+                    
+                    <button onclick="executarPrograma()">Executar Código!</button>
+                    <button onclick="reiniciarJogo()" style="background-color: #f39c12;">Reiniciar</button>
+                </div>
+            </div>
+            <div id="mensagem-jogo2" class="mensagem-jogo" style="display:none;"></div>
+        </section>
+        
+        <section id="jogo3" class="jogo-container repeticao-jogo">
+            <h2>3. Repetição de Queijos 🔁</h2>
+            <p>Use o bloco **REPETIR** (Loop) para evitar comandos repetidos! Pedido: Pão, 5x Queijo, Pão.</p>
+
+            <div class="jogo-area-multi-col">
+                <div class="coluna" style="flex: 0 0 45%;">
+                    <h3>Blocos de Comando e Algoritmo</h3>
+                    <div class="comandos-disponiveis">
+                        <div class="bloco-comando avancar" draggable="true" data-comando="PÃO">PÃO 🍞</div>
+                        <div class="bloco-comando loop" draggable="true" data-comando="REPETIR-INICIO">REPETIR (X VEZES) 🔁</div>
+                        <div class="bloco-comando loop" draggable="true" data-comando="QUEIJO-LOOP">QUEIJO 🧀</div>
+                        <div class="bloco-comando loop" draggable="true" data-comando="REPETIR-FIM">FIM DA REPETIÇÃO</div>
+                    </div>
+
+                    <h3>Seu Algoritmo</h3>
+                    <div id="programa-loop-jogador" class="lista-programa" ondrop="handleDrop(event, 'jogo3')" ondragover="permitirDrop(event)">
+                        <p class="placeholder-programa">Arraste os comandos aqui!</p>
+                    </div>
+                    
+                    <label for="num-repeticao">Repetir (X) vezes:</label>
+                    <input type="number" id="num-repeticao" value="5" min="1" max="10" style="width: 50px; padding: 5px; margin-right: 15px;">
+                    <button onclick="executarProgramaLoop()">Executar a Receita!</button>
+                </div>
+                
+                <div class="coluna" style="background-color: #f7f7f7;">
+                    <h3>Sanduíche Montado</h3>
+                    <div id="sanduiche-final" class="sanduiche-visual"></div>
+                    <div id="mensagem-jogo3" class="mensagem-jogo" style="display:none;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="jogo4" class="jogo-container condicional-jogo">
+            <h2>4. O Ingrediente Secreto ❓</h2>
+            <p>Use a lógica **SE/ENTÃO** (Condicional) para que o robô tome decisões!</p>
+
+            <div class="jogo-area-multi-col">
+                <div class="coluna" style="flex: 0 0 45%;">
+                    <h3>Regra e Blocos</h3>
+                    <div style="background-color: #fffaf0; padding: 10px; margin-bottom: 10px; border-radius: 8px;">
+                        **SE** Monstrinho Verde, **ENTÃO** Picles. **SE NÃO**, Tomate.
+                    </div>
+                    <div class="comandos-disponiveis">
+                        <div class="bloco-comando avancar" draggable="true" data-comando="PÃO">PÃO 🍞</div>
+                        <div class="bloco-comando condicional" draggable="true" data-comando="SE">SE (CONDIÇÃO) ❓</div>
+                        <div class="bloco-comando condicional" draggable="true" data-comando="ENTAO">ENTÃO (PICLES) 🥒</div>
+                        <div class="bloco-comando condicional" draggable="true" data-comando="SENAO">SE NÃO (TOMATE) 🍅</div>
+                    </div>
+
+                    <h3>Seu Algoritmo</h3>
+                    <div id="programa-condicional-jogador" class="lista-programa" ondrop="handleDrop(event, 'jogo4')" ondragover="permitirDrop(event)">
+                        <p class="placeholder-programa">Arraste os comandos aqui!</p>
+                    </div>
+                    
+                    <button onclick="executarProgramaCondicional('Monstrinho Verde')">Testar (Monstrinho)</button>
+                    <button onclick="executarProgramaCondicional('Robô Amarelo')" style="background-color: #f39c12;">Testar (Robô)</button>
+                    <div style="margin-top: 10px;">Cliente Atual: <span id="cliente-atual" style="font-weight: bold; color: var(--cor-tomate);">Monstrinho Verde</span></div>
+                </div>
+
+                <div class="coluna" style="background-color: #f7f7f7;">
+                    <h3>Sanduíche Entregue</h3>
+                    <div id="sanduiche-final-condicional" class="sanduiche-visual"></div>
+                    <div id="mensagem-jogo4" class="mensagem-jogo" style="display:none;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="jogo5" class="jogo-container funcao-jogo">
+            <h2>5. Funções e Blocos Prontos ⚙️</h2>
+            <p>Crie uma **FUNÇÃO** (bloco reutilizável) para simplificar a receita!</p>
+
+            <div class="jogo-area-multi-col">
+                <div class="coluna" style="flex: 0 0 30%;">
+                    <h3>🛠️ 1. Defina: "BASE DO PÃO"</h3>
+                    <div id="funcao-base-pao" class="lista-programa" ondrop="handleDrop(event, 'jogo5-definicao')" ondragover="permitirDrop(event)">
+                        <p class="placeholder-programa">Pão de Baixo, Manteiga, Pão de Cima</p>
+                    </div>
+                </div>
+
+                <div class="coluna" style="flex: 0 0 35%;">
+                    <h3>Blocos e Algoritmo Principal</h3>
+                    <div class="comandos-disponiveis">
+                        <div class="bloco-comando avancar" draggable="true" data-comando="PÃO-BAIXO">PÃO DE BAIXO 🍞</div>
+                        <div class="bloco-comando loop" draggable="true" data-comando="MANTEIGA" style="background-color: #f1c40f;">MANTEIGA 🧈</div>
+                        <div class="bloco-comando avancar" draggable="true" data-comando="PÃO-CIMA">PÃO DE CIMA 🍞</div>
+                        <div class="bloco-comando funcao" draggable="true" data-comando="CHAMAR-FUNÇÃO">CHAMAR FUNÇÃO ⚙️</div>
+                        <div class="bloco-comando condicional" draggable="true" data-comando="QUEIJO" style="background-color: var(--cor-queijo);">QUEIJO 🧀</div>
+                    </div>
+                    <h3>👨‍🍳 Algoritmo Principal</h3>
+                    <div id="programa-principal-funcao" class="lista-programa" ondrop="handleDrop(event, 'jogo5-principal')" ondragover="permitirDrop(event)">
+                        <p class="placeholder-programa">Monte: FUNÇÃO, Queijo, FUNÇÃO, Queijo, FUNÇÃO.</p>
+                    </div>
+                    <button onclick="executarProgramaFuncao()">Executar Funções!</button>
+                </div>
+
+                <div class="coluna" style="background-color: #f7f7f7;">
+                    <h3>Sanduíche Montado</h3>
+                    <div id="sanduiche-final-funcao" class="sanduiche-visual"></div>
+                    <div id="mensagem-jogo5" class="mensagem-jogo" style="display:none;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="jogo6" class="jogo-container variavel-jogo">
+            <h2>6. Organização da Despensa 📦</h2>
+            <p>Use **Variáveis** para guardar a quantidade de ingredientes!</p>
+
+            <div class="jogo-area-multi-col">
+                <div class="coluna" style="flex: 0 0 30%; background-color: #ecf0f1; border: 2px solid #2980b9;">
+                    <h3>📝 1. Defina as Variáveis</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label for="valor-queijo">Variável **QUEIJO** (X):</label>
+                        <input type="number" id="valor-queijo" value="3" min="0" max="10" style="padding: 5px; width: 60px;">
+                    </div>
+                    <div>
+                        <label for="valor-presunto">Variável **PRESUNTO** (Y):</label>
+                        <input type="number" id="valor-presunto" value="2" min="0" max="10" style="padding: 5px; width: 60px;">
+                    </div>
+                </div>
+
+                <div class="coluna" style="flex: 0 0 35%;">
+                    <h3>Blocos e Algoritmo Principal</h3>
+                    <div class="comandos-disponiveis">
+                        <div class="bloco-comando avancar" draggable="true" data-comando="PÃO">PÃO 🍞</div>
+                        <div class="bloco-comando variavel" draggable="true" data-comando="USAR-QUEIJO">USAR **QUEIJO** (X) 🧀</div>
+                        <div class="bloco-comando variavel" draggable="true" data-comando="USAR-PRESUNTO">USAR **PRESUNTO** (Y) 🍖</div>
+                    </div>
+                    <h3>👨‍🍳 Algoritmo Principal</h3>
+                    <div id="programa-principal-variavel" class="lista-programa" ondrop="handleDrop(event, 'jogo6')" ondragover="permitirDrop(event)">
+                        <p class="placeholder-programa">Monte: PÃO, QUEIJO (X), PRESUNTO (Y), PÃO.</p>
+                    </div>
+                    <button onclick="executarProgramaVariavel()">Executar o Pedido!</button>
+                </div>
+
+                <div class="coluna" style="background-color: #f7f7f7;">
+                    <h3>Sanduíche Montado</h3>
+                    <div id="sanduiche-final-variavel" class="sanduiche-visual"></div>
+                    <div id="mensagem-jogo6" class="mensagem-jogo" style="display:none;"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p style="text-align: center; padding: 10px; background-color: #333; color: white; margin-top: 20px;">
+            © Sanduíche Programado | Programando desde pequeno.
+        </p>
+    </footer>
+
+    <script>
+        // =========================================================================
+        // --- FUNÇÕES E VARIÁVEIS GLOBAIS DE JOGO ---
+        // =========================================================================
+
+        const JOGOS_CONFIG = {
+            'jogo1': { id: 'jogo1', titulo: 'Sequência Mágica' },
+            'jogo2': { id: 'jogo2', titulo: 'Robô-Chef' },
+            'jogo3': { id: 'jogo3', titulo: 'Repetição' },
+            'jogo4': { id: 'jogo4', titulo: 'Condicional' },
+            'jogo5': { id: 'jogo5', titulo: 'Funções' },
+            'jogo6': { id: 'jogo6', titulo: 'Variáveis' }
+        };
+
+        const INGREDIENT_COLORS = {
+            'pao': { color: 'var(--cor-pao)', text: '#333' },
+            'queijo': { color: 'var(--cor-queijo)', text: '#333' },
+            'alface': { color: 'var(--cor-alface)', text: 'white' },
+            'tomate': { color: 'var(--cor-tomate)', text: 'white' },
+            'MANTEIGA': { color: '#f1c40f', text: '#333' },
+            'PICLES': { color: 'var(--cor-alface)', text: 'white' },
+            'PRESUNTO': { color: '#c0392b', text: 'white' },
+            'PÃO-BAIXO': { color: 'var(--cor-pao)', text: '#333' },
+            'PÃO-CIMA': { color: 'var(--cor-pao)', text: '#333' },
+        };
+        
+        // --- FUNÇÕES GLOBAIS DE DRAG AND DROP E NAVEGAÇÃO ---
+        
+        function permitirDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function iniciarArrasto(ev) {
+            // Guarda o ID (para Jogo 1) ou o data-comando (para os demais)
+            ev.dataTransfer.setData("text", ev.target.id || ev.target.getAttribute('data-comando'));
+            // Guarda se é um ingrediente (Jogo 1) ou um comando (Jogos 2-6)
+            ev.dataTransfer.setData("type", ev.target.classList.contains('ingrediente') ? 'ingrediente' : 'comando');
+        }
+        
+        // [FUNÇÃO CORRIGIDA] - Função de drop universal que direciona para a lógica correta
+        function handleDrop(ev, jogoId) {
+            ev.preventDefault();
+            const tipo = ev.dataTransfer.getData("type");
+            const dropArea = ev.currentTarget;
+            
+            if (jogoId === 'jogo1' && tipo === 'ingrediente') {
+                return soltarIngrediente(ev, dropArea);
+            } 
+            
+            // Jogo 1 (Comandos), Jogo 5 (Definição) e Jogo 5 (Principal)
+            if (jogoId !== 'jogo1' && tipo === 'comando') { 
+                // Evita que ingredientes de Jogo 1 caiam em outras áreas
+                return soltarComando(ev, dropArea);
+            }
+        }
+        
+        function soltarComando(ev, dropArea) {
+            const data = ev.dataTransfer.getData("text");
+            
+            const placeholder = dropArea.querySelector('.placeholder-programa');
+            if (placeholder) dropArea.removeChild(placeholder);
+
+            // Acha o bloco original usando o data-comando (funciona para todos os jogos 2-6)
+            const blocoOriginal = document.querySelector(`[data-comando='${data}']`);
+            
+            if (!blocoOriginal) return; // Se não encontrar, sai
+
+            const novoBloco = document.createElement('div');
+            novoBloco.classList.add('bloco-comando');
+            novoBloco.setAttribute('data-comando', data);
+            novoBloco.textContent = blocoOriginal.textContent;
+            
+            // Copia as classes de cor e estilo do bloco original
+            novoBloco.className = blocoOriginal.className;
+            novoBloco.style.backgroundColor = blocoOriginal.style.backgroundColor;
+            novoBloco.style.color = blocoOriginal.style.color;
+            
+            // Permite remover o bloco com um clique
+            novoBloco.onclick = () => dropArea.removeChild(novoBloco); 
+            
+            dropArea.appendChild(novoBloco);
+        }
+
+        function mostrarJogo(idJogo) {
+            document.querySelectorAll('.jogo-container').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(idJogo).classList.add('active');
+            
+            document.querySelectorAll('#menu-jogos a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${idJogo}`) {
+                    link.classList.add('active');
+                }
+            });
+            
+            if (idJogo === 'jogo2') {
+                reiniciarJogo();
+            }
+        }
+        
+        function montarIngredienteVisual(nomeBruto, containerId) {
+            const nome = nomeBruto.replace('-', ' ');
+            const container = document.getElementById(containerId);
+            const cor = INGREDIENT_COLORS[nomeBruto] || INGREDIENT_COLORS[nomeBruto.split('-')[0]] || { color: '#ccc', text: '#333' };
+
+            const div = document.createElement('div');
+            div.className = 'sanduiche-ingrediente';
+            div.textContent = nome.charAt(0) + nome.slice(1).toLowerCase();
+            div.style.backgroundColor = cor.color;
+            div.style.color = cor.text;
+            container.appendChild(div);
+            return nomeBruto;
+        }
+
+        // =========================================================================
+        // --- JOGO 1: SEQUÊNCIA MÁGICA (ALGORITMO) ---
+        // =========================================================================
+
+        const RECEITA_SECRETA = ['pao', 'alface', 'queijo', 'tomate', 'pao'];
+
+        function initJogo1() {
+            const receitaAlvoDiv = document.getElementById('receita-alvo');
+            receitaAlvoDiv.innerHTML = RECEITA_SECRETA.map(ing => {
+                const cor = INGREDIENT_COLORS[ing];
+                return `<div class="bloco-comando" style="background-color: ${cor.color}; color: ${cor.text};">${ing.charAt(0).toUpperCase() + ing.slice(1)}</div>`;
+            }).join('');
+            
+            document.getElementById('sanduiche-jogador').innerHTML = '<p class="placeholder-programa">Arraste os ingredientes para cá!</p>';
+            document.getElementById('mensagem-jogo1').style.display = 'none';
+        }
+        
+        function soltarIngrediente(ev, dropArea) {
+            const data = ev.dataTransfer.getData("text");
+            const ingredienteOriginal = document.getElementById(data);
+            
+            const placeholder = dropArea.querySelector('p');
+            if (placeholder) dropArea.removeChild(placeholder);
+
+            const cor = INGREDIENT_COLORS[data];
+            const novoIngrediente = document.createElement('div');
+            novoIngrediente.className = 'bloco-comando';
+            novoIngrediente.textContent = ingredienteOriginal.textContent;
+            novoIngrediente.setAttribute('data-ingrediente-id', data); 
+            novoIngrediente.style.backgroundColor = cor.color;
+            novoIngrediente.style.color = cor.text;
+            novoIngrediente.onclick = () => dropArea.removeChild(novoIngrediente); 
+            
+            dropArea.appendChild(novoIngrediente);
+        }
+
+        function verificarSequencia() {
+            const sanduicheJogador = document.getElementById('sanduiche-jogador');
+            const mensagemJogo1 = document.getElementById('mensagem-jogo1');
+            const ingredientesMontados = Array.from(sanduicheJogador.querySelectorAll('[data-ingrediente-id]')).map(el => el.getAttribute('data-ingrediente-id'));
+            mensagemJogo1.style.display = 'block';
+
+            if (ingredientesMontados.length !== RECEITA_SECRETA.length || JSON.stringify(ingredientesMontados) !== JSON.stringify(RECEITA_SECRETA)) {
+                mensagemJogo1.textContent = "🚨 ERRO DE LÓGICA! A ordem ou a quantidade não está correta. Tente de novo!";
+                mensagemJogo1.style.backgroundColor = '#fce4ec';
+                mensagemJogo1.style.color = 'var(--cor-tomate)';
+            } else {
+                mensagemJogo1.textContent = "🎉 PARABÉNS! Sequência Mágica Dominada! Algoritmo perfeito!";
+                mensagemJogo1.style.backgroundColor = '#d4edda';
+                mensagemJogo1.style.color = '#155724';
+            }
+        }
+
+       // =========================================================================
+        // --- JOGO 2: AVENTURA DO ROBÔ-CHEF (DEBUGGING) ---
+        // =========================================================================
+        
+        // [CÓDIGO ANTERIOR DE INICIALIZAÇÃO (iniciarJogo2) PERMANECE O MESMO]
+
+        // ...
+        // [FUNÇÃO executarComando - MANTIDA, POIS A LÓGICA DE MOVIMENTO ESTAVA CORRETA]
+
+        function executarComando(comando) {
+            let novoX = robo.x, novoY = robo.y;
+            
+            if (comando === 'AVANCAR') {
+                if (robo.direcao === 'Norte') novoY--;
+                else if (robo.direcao === 'Sul') novoY++;
+                else if (robo.direcao === 'Leste') novoX++;
+                else if (robo.direcao === 'Oeste') novoX--;
+
+                // Verifica limites
+                if (novoX < 0 || novoX >= TAMANHO_GRID || novoY < 0 || novoY >= TAMANHO_GRID) {
+                    return { sucesso: false, mensagem: "🚨 ERRO DE LÓGICA (BATEU)! Robô bateu na parede. Corrija o código!" };
+                }
+                robo.x = novoX;
+                robo.y = novoY;
+
+            } else if (comando === 'DIREITA' || comando === 'ESQUERDA') {
+                let currentIndex = DIRECTIONS.indexOf(robo.direcao);
+                currentIndex = (comando === 'DIREITA') ? (currentIndex + 1) % 4 : (currentIndex - 1 + 4) % 4;
+                robo.direcao = DIRECTIONS[currentIndex];
+            }
+            return { sucesso: true };
+        }
+
+        // [NOVO] Função executarPrograma SEM async/await para evitar travamentos
+        function executarPrograma() {
+            // Reinicia o estado antes de executar o programa
+            iniciarJogo2(); 
+            const programaJogador = document.getElementById('programa-jogador');
+            const mensagemJogo2 = document.getElementById('mensagem-jogo2');
+            const comandos = Array.from(programaJogador.querySelectorAll('[data-comando]')).map(el => el.getAttribute('data-comando'));
+            
+            mensagemJogo2.style.display = 'block';
+
+            if (comandos.length === 0) {
+                mensagemJogo2.textContent = "⚠️ Arraste blocos de comando para o seu programa.";
+                mensagemJogo2.style.backgroundColor = '#fff3cd';
+                return;
+            }
+
+            // Variável para controlar se houve erro
+            let programaComErro = false;
+
+            for (const comando of comandos) {
+                const resultado = executarComando(comando);
+                atualizarPosicaoRobo();
+
+                if (!resultado.sucesso) {
+                    mensagemJogo2.textContent = resultado.mensagem;
+                    mensagemJogo2.style.backgroundColor = '#fce4ec';
+                    mensagemJogo2.style.color = 'var(--cor-tomate)';
+                    programaComErro = true;
+                    break; 
+                }
+
+                if (robo.x === ALVO_QUEIJO.x && robo.y === ALVO_QUEIJO.y) {
+                    mensagemJogo2.textContent = "🎉 SUCESSO! Você programou o caminho perfeito e encontrou o Queijo!";
+                    mensagemJogo2.style.backgroundColor = '#d4edda';
+                    mensagemJogo2.style.color = '#155724';
+                    return;
+                }
+            }
+            
+            // Se o programa terminou sem erro e sem chegar ao alvo
+            if (!programaComErro && !(robo.x === ALVO_QUEIJO.x && robo.y === ALVO_QUEIJO.y)) {
+                mensagemJogo2.textContent = "🧐 Fim da Linha! Seu programa acabou antes de chegar ao alvo. Revise a sequência!";
+                mensagemJogo2.style.backgroundColor = '#fce4ec';
+                mensagemJogo2.style.color = 'var(--cor-tomate)';
+            }
+        }
+        
+        // =========================================================================
+        // --- JOGO 3: REPETIÇÃO DE QUEIJOS (LOOP) ---
+        // =========================================================================
+        
+        const RECEITA_LOOP_ALVO = ['pao', 'queijo', 'queijo', 'queijo', 'queijo', 'queijo', 'pao'];
+        
+        function executarProgramaLoop() {
+            const programaLoopJogador = document.getElementById('programa-loop-jogador');
+            const mensagemJogo3 = document.getElementById('mensagem-jogo3');
+            const sanduicheFinal = document.getElementById('sanduiche-final');
+
+            sanduicheFinal.innerHTML = '';
+            mensagemJogo3.style.display = 'block';
+            
+            const comandos = Array.from(programaLoopJogador.querySelectorAll('[data-comando]')).map(el => el.getAttribute('data-comando'));
+            const comandosExecutados = [];
+            let i = 0;
+            let emLoop = false;
+            let loopStart = -1;
+            const numRepeticao = parseInt(document.getElementById('num-repeticao').value) || 0;
+
+            if (numRepeticao < 1) { mensagemJogo3.textContent = "🚨 ERRO! Repetição deve ser no mínimo 1."; return; }
+
+            while (i < comandos.length) {
+                const comando = comandos[i];
+
+                if (comando === 'PÃO') {
+                    comandosExecutados.push(montarIngredienteVisual('pao', 'sanduiche-final'));
+
+                } else if (comando === 'REPETIR-INICIO') {
+                    if (emLoop) { mensagemJogo3.textContent = "🚨 ERRO DE LÓGICA! Loop dentro de Loop não permitido."; return; }
+                    emLoop = true;
+                    loopStart = i;
+
+                } else if (comando === 'REPETIR-FIM') {
+                    if (!emLoop) { mensagemJogo3.textContent = "🚨 ERRO DE LÓGICA! Fim de repetição sem Início."; return; }
+                    
+                    const comandosDoLoop = comandos.slice(loopStart + 1, i); 
+                    if (comandosDoLoop.length === 0) { mensagemJogo3.textContent = "🚨 ERRO! Loop vazio."; return; }
+
+                    for (let r = 0; r < numRepeticao; r++) {
+                        comandosDoLoop.forEach(cmd => {
+                            if (cmd === 'QUEIJO-LOOP') comandosExecutados.push(montarIngredienteVisual('queijo', 'sanduiche-final'));
+                        });
+                    }
+                    emLoop = false;
+                    loopStart = -1; 
+                    
+                } else if (comando === 'QUEIJO-LOOP' && !emLoop) {
+                     mensagemJogo3.textContent = "🚨 ERRO! O QUEIJO só pode ser usado DENTRO do bloco REPETIR."; return;
+                }
+                
+                i++;
+            }
+
+            if (emLoop) {
+                mensagemJogo3.textContent = "🚨 ERRO DE LÓGICA! O bloco REPETIR foi iniciado, mas não foi finalizado.";
+                return;
+            }
+
+            if (JSON.stringify(RECEITA_LOOP_ALVO) === JSON.stringify(comandosExecutados)) {
+                mensagemJogo3.textContent = "🎉 PARABÉNS! Loop Dominado!";
+                mensagemJogo3.style.backgroundColor = '#d4edda';
+                mensagemJogo3.style.color = '#155724';
+            } else {
+                mensagemJogo3.textContent = "🧐 ERRO! Revise o uso da repetição.";
+            }
+        }
+        
+        // =========================================================================
+        // --- JOGO 4: O INGREDIENTE SECRETO (CONDICIONAL) ---
+        // =========================================================================
+
+        function executarProgramaCondicional(tipoCliente) {
+            const programaCondicionalJogador = document.getElementById('programa-condicional-jogador');
+            const sanduicheFinalCondicional = document.getElementById('sanduiche-final-condicional');
+            const mensagemJogo4 = document.getElementById('mensagem-jogo4');
+            
+            sanduicheFinalCondicional.innerHTML = '';
+            mensagemJogo4.style.display = 'block';
+            document.getElementById('cliente-atual').textContent = tipoCliente;
+
+            const comandos = Array.from(programaCondicionalJogador.querySelectorAll('[data-comando]')).map(el => el.getAttribute('data-comando'));
+            const sanduicheFinal = [];
+            let ingredienteSecreto = null;
+
+            if (!comandos.includes('SE') || !comandos.includes('ENTAO') || !comandos.includes('SENAO')) {
+                mensagemJogo4.textContent = "🚨 ERRO ESTRUTURAL! Falta SE, ENTÃO ou SE NÃO.";
+                return;
+            }
+            
+            for (const comando of comandos) {
+                if (comando === 'PÃO') {
+                    sanduicheFinal.push(montarIngredienteVisual('pao', 'sanduiche-final-condicional'));
+                    
+                } else if (comando === 'SE') {
+                    ingredienteSecreto = (tipoCliente === 'Monstrinho Verde') ? 'PICLES' : 'TOMATE'; 
+
+                } else if (comando === 'ENTAO' && ingredienteSecreto === 'PICLES') {
+                    sanduicheFinal.push(montarIngredienteVisual('PICLES', 'sanduiche-final-condicional'));
+
+                } else if (comando === 'SENAO' && ingredienteSecreto === 'TOMATE') {
+                    sanduicheFinal.push(montarIngredienteVisual('tomate', 'sanduiche-final-condicional'));
+                }
+            }
+
+            const ingredienteCorreto = (
+                (tipoCliente === 'Monstrinho Verde' && sanduicheFinal[1] === 'PICLES') ||
+                (tipoCliente === 'Robô Amarelo' && sanduicheFinal[1] === 'tomate')
+            );
+            const sanduicheCorreto = (sanduicheFinal.length === 3 && sanduicheFinal[0] === 'pao' && sanduicheFinal[2] === 'pao');
+
+            if (sanduicheCorreto && ingredienteCorreto) {
+                mensagemJogo4.textContent = `🎉 SUCESSO! SE/ENTÃO funcionou para o ${tipoCliente}!`;
+                mensagemJogo4.style.backgroundColor = '#d4edda';
+                mensagemJogo4.style.color = '#155724';
+            } else {
+                mensagemJogo4.textContent = "🧐 ALGORITMO ERRADO! Revise a sequência e a regra condicional.";
+                mensagemJogo4.style.backgroundColor = '#fce4ec';
+                mensagemJogo4.style.color = 'var(--cor-tomate)';
+            }
+        }
+
+        // =========================================================================
+        // --- JOGO 5: FUNÇÕES E BLOCOS PRONTOS ---
+        // =========================================================================
+
+        const FUNCAO_DEFINITION = ['PÃO-BAIXO', 'MANTEIGA', 'PÃO-CIMA'];
+        const RECEITA_COMPLETA_FUNCAO = [
+            'PÃO-BAIXO', 'MANTEIGA', 'PÃO-CIMA', 'queijo', 
+            'PÃO-BAIXO', 'MANTEIGA', 'PÃO-CIMA', 'queijo', 
+            'PÃO-BAIXO', 'MANTEIGA', 'PÃO-CIMA'
+        ];
+
+        function executarProgramaFuncao() {
+            const comandosFuncao = Array.from(document.getElementById('funcao-base-pao').querySelectorAll('[data-comando]')).map(el => el.getAttribute('data-comando'));
+            const comandosPrincipal = Array.from(document.getElementById('programa-principal-funcao').querySelectorAll('[data-comando]')).map(el => el.getAttribute('data-comando'));
+            const sanduicheFinalFuncao = document.getElementById('sanduiche-final-funcao');
+            const mensagemJogo5 = document.getElementById('mensagem-jogo5');
+
+            sanduicheFinalFuncao.innerHTML = ''; 
+            mensagemJogo5.style.display = 'block';
+            
+            if (JSON.stringify(comandosFuncao) !== JSON.stringify(FUNCAO_DEFINITION)) {
+                mensagemJogo5.textContent = "🚨 ERRO NA FUNÇÃO! Defina 'Pão de Baixo, Manteiga, Pão de Cima'.";
+                return;
+            }
+            
+            const comandosExecutados = [];
+
+            for (const comando of comandosPrincipal) {
+                if (comando === 'CHAMAR-FUNÇÃO') {
+                    comandosFuncao.forEach(cmd => comandosExecutados.push(montarIngredienteVisual(cmd, 'sanduiche-final-funcao')));
+                } else if (comando === 'QUEIJO') {
+                    comandosExecutados.push(montarIngredienteVisual('queijo', 'sanduiche-final-funcao'));
+                }
+            }
+            
+            if (JSON.stringify(comandosExecutados) === JSON.stringify(RECEITA_COMPLETA_FUNCAO)) {
+                mensagemJogo5.textContent = "🎉 VITÓRIA! Funções usadas com sucesso!";
+                mensagemJogo5.style.backgroundColor = '#d4edda';
+                mensagemJogo5.style.color = '#155724';
+            } else {
+                mensagemJogo5.textContent = "🧐 ERRO NO ALGORITMO PRINCIPAL! Verifique as chamadas da função.";
+                mensagemJogo5.style.backgroundColor = '#fce4ec';
+                mensagemJogo5.style.color = 'var(--cor-tomate)';
+            }
+        }
+        
+        // =========================================================================
+        // --- JOGO 6: ORGANIZAÇÃO DA DESPENSA (VARIÁVEIS) ---
+        // =========================================================================
+
+        function executarProgramaVariavel() {
+            const sanduicheFinalVar = document.getElementById('sanduiche-final-variavel');
+            const mensagemJogo6 = document.getElementById('mensagem-jogo6');
+            
+            sanduicheFinalVar.innerHTML = '';
+            mensagemJogo6.style.display = 'block';
+            
+            const QUANTIDADE_QUEIJO = parseInt(document.getElementById('valor-queijo').value) || 0;
+            const QUANTIDADE_PRESUNTO = parseInt(document.getElementById('valor-presunto').value) || 0;
+            
+            const comandosPrincipal = Array.from(document.getElementById('programa-principal-variavel').querySelectorAll('[data-comando]')).map(el => el.getAttribute('data-comando'));
+            const comandosExecutados = [];
+            
+            for (const comando of comandosPrincipal) {
+                if (comando === 'PÃO') {
+                    comandosExecutados.push(montarIngredienteVisual('pao', 'sanduiche-final-variavel'));
+                } else if (comando === 'USAR-QUEIJO') {
+                    for (let i = 0; i < QUANTIDADE_QUEIJO; i++) {
+                        comandosExecutados.push(montarIngredienteVisual('queijo', 'sanduiche-final-variavel'));
+                    }
+                } else if (comando === 'USAR-PRESUNTO') {
+                    for (let i = 0; i < QUANTIDADE_PRESUNTO; i++) {
+                        comandosExecutados.push(montarIngredienteVisual('PRESUNTO', 'sanduiche-final-variavel'));
+                    }
+                }
+            }
+            
+            const target = ['pao'];
+            for (let i = 0; i < QUANTIDADE_QUEIJO; i++) target.push('queijo');
+            for (let i = 0; i < QUANTIDADE_PRESUNTO; i++) target.push('PRESUNTO');
+            target.push('pao');
+            
+            if (JSON.stringify(comandosExecutados) === JSON.stringify(target)) {
+                mensagemJogo6.textContent = `🎉 VITÓRIA! Variáveis usadas: ${QUANTIDADE_QUEIJO} Queijos e ${QUANTIDADE_PRESUNTO} Presuntos.`;
+                mensagemJogo6.style.backgroundColor = '#d4edda';
+                mensagemJogo6.style.color = '#155724';
+            } else {
+                mensagemJogo6.textContent = "🧐 ERRO NO ALGORITMO! O sanduíche não seguiu a ordem correta dos comandos ou faltou um pão.";
+                mensagemJogo6.style.backgroundColor = '#fce4ec';
+                mensagemJogo6.style.color = 'var(--cor-tomate)';
+            }
+        }
+
+        // =========================================================================
+        // --- INICIALIZAÇÃO GERAL ---
+        // =========================================================================
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const menu = document.getElementById('menu-jogos');
+            const jogos = document.querySelectorAll('.jogo-container');
+            
+            // 1. Monta o menu de navegação
+            jogos.forEach((jogo) => {
+                const id = jogo.id;
+                const titulo = JOGOS_CONFIG[id].titulo;
+                
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `#${id}`;
+                a.textContent = titulo;
+                a.onclick = (e) => {
+                    e.preventDefault();
+                    mostrarJogo(id);
+                };
+                li.appendChild(a);
+                menu.appendChild(li);
+            });
+            
+            // 2. Inicializa o drag-and-drop
+            document.querySelectorAll('.ingrediente, .bloco-comando').forEach(item => {
+                item.addEventListener('dragstart', iniciarArrasto);
+            });
+            
+            // 3. Inicializa Jogo 1 e Jogo 2
+            initJogo1();
+            iniciarJogo2();
+            
+            // 4. Mostra o primeiro jogo
+            if (jogos.length > 0) {
+                mostrarJogo(jogos[0].id);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+        /* 1. Reset Básico e Fontes */
+        body {
+            font-family: 'Poppins', 'Arial', sans-serif; 
+            margin: 0;
+            padding: 0;
+            background-color: #F7E7C5; /* Cor de pão claro/massa */
+            color: #212121;
+        }
+
+        /* 2. Cabeçalho (O Pão de Cima) */
+        header {
+            background-color: #FFC107; /* Amarelo de queijo/mostarda */
+            color: #E65100; /* Laranja forte */
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 8px solid #4CAF50; /* Linha verde de alface */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5em;
+            font-weight: 900;
+            text-shadow: 2px 2px #FFFFFF;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-style: italic;
+            font-size: 1.2em;
+        }
+
+        /* 3. Navegação (Recheio Central) */
+        nav {
+            background-color: #E65100; /* Laranja de carne/presunto */
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #FFC107; /* Efeito hover amarelo */
+            color: #E65100;
+        }
+
+        /* 4. Layout Geral */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0;
+        }
+
+        .section {
+            background-color: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 15px; /* Bordas arredondadas infantis */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border: 3px solid #4CAF50; /* Borda verde */
+        }
+
+        h2 {
+            color: #E65100;
+            font-size: 2.2em;
+            border-bottom: 4px dashed #FFC107; /* Linha pontilhada temática */
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* 5. Grid de Jogos e Vídeos (Responsivo) */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card, .video-card {
+            border: 3px dashed #FFC107;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .game-card:hover, .video-card:hover {
+            transform: translateY(-5px); /* Efeito de 'salto' ao passar o mouse */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Estilos Temáticos para Cards */
+        .game-card {
+            background-color: #FFFDE7; /* Amarelo muito claro */
+        }
+
+        .video-card {
+            background-color: #E0F7FA; /* Azul claro para vídeos */
+        }
+
+        .game-card h3, .video-card h3 {
+            color: #4CAF50; /* Verde de alface */
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+
+        /* 6. Estilo dos Botões */
+        button {
+            background-color: #FF5722; /* Laranja vivo de tempero */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin-top: 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            box-shadow: 0 4px #E64A19; /* Efeito 3D sutil */
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            background-color: #E64A19;
+            box-shadow: 0 2px #C23E17;
+            transform: translateY(2px);
+        }
+
+        /* 7. Seção de Progresso */
+        #progresso div {
+            padding: 30px;
+            border: 4px solid #4CAF50;
+            border-radius: 10px;
+            background-color: #F1F8E9; /* Fundo verde clarinho */
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* 8. Rodapé (O Pão de Baixo) */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        /* Responsividade (Ajuste para telas menores) */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            nav a {
+                display: block;
+                margin: 5px 0;
+            }
+            .section {
+                padding: 20px;
+            }
+        }
+
+        /* ================================================= */
+        /* ESTILOS DOS MODAIS (Pop-ups dos Jogos) */
+        /* ================================================= */
+
+        /* Estilo do Modal Geral */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border: 5px solid #4CAF50;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            text-align: center;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover, .close-button:focus {
+            color: #E65100;
+            text-decoration: none;
+        }
+        .jogo-container, .jogo-labirinto-container, .jogo-condicional-container, .jogo-final-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .comandos-pool, .algoritmo-area {
+            flex: 1;
+            border: 2px dashed #FFC107;
+            padding: 10px;
+            min-height: 200px;
+            background-color: #FFFDE7;
+            border-radius: 8px;
+        }
+        .algoritmo-area {
+            background-color: #E8F5E9; /* Fundo mais claro para a área de montagem */
+        }
+        .comando, .bloco-logico, .bloco-final, .bloco-reposicao, .bloco-repeticao, .bloco-basico {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            cursor: grab;
+            user-select: none;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            /* Estilos de cor padrão (podem ser sobrescritos inline para temas) */
+            background-color: #FF5722; 
+            display: block;
+        }
+        
+        /* Cores Temáticas dos Blocos */
+        .comando { background-color: #FF5722; } /* Sequência */
+        .bloco-repeticao { background-color: #03A9F4; } /* Repetição */
+        .bloco-basico { background-color: #9C27B0; } /* Virar (Ação Básica) */
+        .bloco-logico { background-color: #64B5F6; } /* Condicional */
+        .bloco-final { background-color: #9E9E9E; } /* FIMSE/FIMPARA */
+        .bloco-reposicao { background-color: #00BCD4; } /* Debugging */
+        
+        .comando-bugado { 
+            background-color: #FF7043 !important; 
+            border: 2px dashed #FFF;
+        }
+
+        /* Estilo Jogo da Memória */
+        .card-memoria {
+            background-color: #f7b4c6; /* Cor de chiclete divertida */
+            color: #4A148C;
+            height: 100px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .card-memoria.flip {
+            transform: rotateY(180deg);
+        }
+
+        .card-memoria.match {
+            background-color: #4CAF50; /* Verde de acerto */
+            color: white;
+            cursor: default;
+        }
+
+        .content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            line-height: 100px; /* Centraliza verticalmente o texto */
+            backface-visibility: hidden;
+            border-radius: 8px;
+        }
+        .content.verso {
+            background-color: #FFC107; /* Amarelo de sanduíche */
+            color: #E65100;
+        }
+        .content.frente {
+            transform: rotateY(180deg);
+            background-color: #f7b4c6;
+        }

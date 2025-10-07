@@ -1,0 +1,235 @@
+        /* [ESTILOS CSS MANTIDOS IGUAIS À VERSÃO ANTERIOR] */
+        :root {
+            --cor-pao: #f5deb3;
+            --cor-alface: #6aa84f;
+            --cor-tomate: #ff6347; 
+            --cor-queijo: #ffd700; 
+            --cor-fundo-main: #f0f8ff; 
+            --cor-fundo-jogo: #ffffff;
+            --sombra-ludica: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo-main);
+            color: #333;
+            padding-top: 80px; 
+        }
+
+        header {
+            background-color: var(--cor-queijo);
+            box-shadow: var(--sombra-ludica);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: 5px solid var(--cor-tomate);
+        }
+
+        header h1 {
+            color: #333;
+            font-size: 1.8em;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            background-color: white;
+            border: 2px solid var(--cor-alface);
+        }
+
+        nav ul li a.active, nav ul li a:hover {
+            background-color: var(--cor-tomate);
+            color: white;
+            transform: scale(1.05);
+            border-color: var(--cor-tomate);
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .jogo-container {
+            background-color: var(--cor-fundo-jogo);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border: 5px solid var(--cor-alface);
+            margin-top: 20px;
+            display: none; 
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .jogo-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .jogo-container h2 {
+            text-align: center;
+            color: var(--cor-tomate);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px var(--cor-queijo);
+        }
+        
+        .jogo-container p {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .bloco-comando, .ingrediente {
+            padding: 12px 18px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: grab;
+            user-select: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            margin: 5px 0;
+        }
+        
+        .comandos-disponiveis {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #eee;
+            border-radius: 10px;
+        }
+
+        .lista-programa, #sanduiche-jogador, .sanduiche-visual {
+            min-height: 180px;
+            border: 4px dashed #999;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column-reverse; 
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .lista-programa, #sanduiche-jogador {
+            flex-direction: column;
+        }
+
+        .sanduiche-visual {
+            justify-content: flex-start;
+        }
+        
+        .placeholder-programa {
+            color: #999;
+            text-align: center;
+            padding-top: 60px;
+            font-style: italic;
+        }
+        
+        button {
+            padding: 12px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            margin-top: 15px;
+            margin-right: 10px;
+            background-color: var(--cor-alface);
+            color: white;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        
+        .avancar { background-color: #4CAF50; border-color: #38761D; } 
+        .virar { background-color: #FF5733; border-color: #C70039; } 
+        .loop { background-color: #9B59B6; border-color: #8E44AD; } 
+        .condicional { background-color: #F39C12; border-color: #E67E22; } 
+        .funcao { background-color: #3498DB; border-color: #2980B9; } 
+        .variavel { background-color: #1ABC9C; border-color: #16A085; } 
+
+        .jogo-area-grid, .jogo-area-robo, .jogo-area-multi-col {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .coluna {
+            flex: 1;
+            padding: 15px;
+            border-radius: 10px;
+            min-height: 350px;
+        }
+        
+        .tabuleiro-grid {
+            width: 450px;
+            height: 450px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            border: 3px solid #333;
+            background-color: #f7f7f7;
+            position: relative;
+        }
+
+        .celula { border: 1px dashed #ccc; }
+        .robo, .alvo-ingrediente {
+            width: 90px; height: 90px; position: absolute; transition: transform 0.5s;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5em; font-weight: bold;
+        }
+        .robo { background-color: #3e82b7; border-radius: 50%; color: white; }
+        .alvo-ingrediente { background-color: var(--cor-queijo); border: 2px solid var(--cor-tomate); }
+
+        .sanduiche-ingrediente {
+            width: 90%;
+            padding: 8px 0;
+            margin: 2px 0;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 4px;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        /* 8. Rodapé (O Pão de Baixo) */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
