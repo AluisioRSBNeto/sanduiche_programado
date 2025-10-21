@@ -293,4 +293,14 @@
             background-color: #f7b4c6;
         }
 
-        
+        .responsivo{
+            width: 100%;
+            max-width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        .responsivo iframe{
+            width: 100%;
+            max-width: 100%;
+            border: none;
+        }
