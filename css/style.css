@@ -304,3 +304,9 @@
             max-width: 100%;
             border: none;
         }
+
+        .responsivo video{
+            width: 100%;
+            max-width: 100%;
+            border: none;
+        }
